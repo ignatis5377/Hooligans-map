@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Παράδειγμα Ενσωμάτωσης Web Map Widget</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: #f8fafc;
+            color: #334155;
+            padding: 24px;
+            max-width: 1000px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        h1 { color: #0f172a; margin-bottom: 8px; }
+        .intro { color: #64748b; margin-bottom: 24px; }
+        .widget-wrapper {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            margin-bottom: 32px;
+            border: 1px solid #e2e8f0;
+        }
+        iframe.map-widget-frame {
+            width: 100%;
+            height: 550px;
+            border: none;
+            border-radius: 12px;
+            display: block;
+        }
+        .code-box {
+            background: #0f172a;
+            color: #f8fafc;
+            padding: 16px 20px;
+            border-radius: 10px;
+            font-family: "Courier New", Courier, monospace;
+            font-size: 14px;
+            overflow-x: auto;
+            margin-top: 10px;
+        }
+        .code-box code { color: #38bdf8; }
+        .section-title { font-size: 18px; font-weight: 700; color: #0f172a; margin-top: 24px; }
+    </style>
+</head>
+<body>
+
+    <h1>🗺️ Hooligans Live Photo Map</h1>
+    <p class="intro">
+        Παράδειγμα για το πώς φαίνεται ο χάρτης με τις φωτογραφίες ενσωματωμένος μέσα σε οποιαδήποτε ιστοσελίδα.
+    </p>
+
+    <div class="widget-wrapper">
+        <!-- Εδώ μπαίνει το iFrame του Widget -->
+        <iframe class="map-widget-frame" src="index.html" title="Hooligans Geo Map"></iframe>
+    </div>
+
+    <div class="section-title">📋 Κώδικας Ενσωμάτωσης (Copy & Paste στο site σας)</div>
+    <p>Για να βάλετε τον χάρτη στο WordPress, Elementor, Squarespace ή custom HTML, χρησιμοποιήστε το παρακάτω snippet:</p>
+
+    <div class="code-box">
+        <code>&lt;iframe src="https://YOUR-SITE-URL.com/web-widget/index.html" width="100%" height="600px" style="border:none; border-radius:12px; box-shadow:0 8px 30px rgba(0,0,0,0.12);" allow="geolocation"&gt;&lt;/iframe&gt;</code>
+    </div>
+
+</body>
+</html>

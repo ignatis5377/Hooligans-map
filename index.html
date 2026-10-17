@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Hooligans Geo-Photos Map</title>
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    
+    <!-- Leaflet MarkerCluster CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
+
+    <!-- Custom Widget Styles -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="map-container">
+        <!-- Floating Header Controls -->
+        <div class="map-header-bar">
+            <div class="map-badge-group">
+                <div id="status-badge" class="map-badge">
+                    <span class="dot"></span> Φόρτωση σημείων...
+                </div>
+            </div>
+
+            <div class="map-controls-group">
+                <button id="btn-fit-all" class="btn-icon" title="Προβολή όλων των σημείων">
+                    <span>🎯</span> Όλα τα Σημεία
+                </button>
+                <button id="btn-refresh" class="btn-icon" title="Ανανέωση">
+                    <span>🔄</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- The Leaflet Map Canvas -->
+        <div id="map"></div>
+
+        <!-- Loading Overlay -->
+        <div id="loading-overlay" class="map-loading-overlay">
+            <div class="spinner"></div>
+            <span>Φόρτωση χάρτη...</span>
+        </div>
+
+        <!-- Fullscreen Lightbox Modal -->
+        <div id="lightbox-modal" class="lightbox-modal">
+            <button id="lightbox-close" class="lightbox-close" title="Κλείσιμο">&times;</button>
+            <div class="lightbox-content">
+                <img id="lightbox-image" class="lightbox-image" src="" alt="Full Screen Photo">
+                <div class="lightbox-caption">
+                    <h3 id="lightbox-title"></h3>
+                    <p id="lightbox-desc"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    
+    <!-- Leaflet MarkerCluster JS -->
+    <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+
+    <!-- Supabase Configuration & Widget Scripts -->
+    <script src="config.js"></script>
+    <script src="widget.js"></script>
+</body>
+</html>

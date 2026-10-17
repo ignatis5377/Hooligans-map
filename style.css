@@ -1,0 +1,413 @@
+/* ==========================================================================
+   Web Map Widget Styles - Hooligans Geo Photos
+   ========================================================================== */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body, html {
+    width: 100%;
+    height: 100%;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: #1e293b;
+    background-color: #0f172a;
+    overflow: hidden;
+}
+
+#map-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+#map {
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+/* ==========================================================================
+   Header Control Bar Overlay
+   ========================================================================== */
+.map-header-bar {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    right: 16px;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    pointer-events: none; /* Let clicks pass through except buttons */
+}
+
+.map-badge-group {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    pointer-events: auto;
+}
+
+.map-badge {
+    background: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: #f8fafc;
+    padding: 8px 14px;
+    border-radius: 9999px;
+    font-size: 13px;
+    font-weight: 600;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.map-badge .dot {
+    width: 8px;
+    height: 8px;
+    background: #10b981;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #10b981;
+    animation: pulse 2s infinite;
+}
+
+.map-badge.warning {
+    background: rgba(217, 119, 6, 0.9);
+}
+
+.map-controls-group {
+    display: flex;
+    gap: 8px;
+    pointer-events: auto;
+}
+
+.btn-icon {
+    background: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: #f8fafc;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 8px 14px;
+    border-radius: 9999px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+}
+
+.btn-icon:hover {
+    background: #2563eb;
+    border-color: #3b82f6;
+    transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   Custom Marker Pin Styles
+   ========================================================================== */
+.custom-photo-pin {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.custom-photo-pin-inner {
+    width: 38px;
+    height: 38px;
+    background: #e11d48;
+    border: 3px solid #ffffff;
+    border-radius: 50% 50% 50% 0;
+    transform: rotate(-45deg);
+    box-shadow: 0 4px 14px rgba(225, 29, 72, 0.45), 0 2px 6px rgba(0,0,0,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.custom-photo-pin-inner svg {
+    transform: rotate(45deg);
+    width: 18px;
+    height: 18px;
+    fill: #ffffff;
+}
+
+.custom-photo-pin:hover .custom-photo-pin-inner {
+    transform: rotate(-45deg) scale(1.15);
+    background: #be123c;
+}
+
+/* Cluster Marker Customization */
+.marker-cluster-custom {
+    background: rgba(225, 29, 72, 0.35);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.marker-cluster-custom div {
+    width: 36px;
+    height: 36px;
+    background: #e11d48;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 14px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #ffffff;
+    box-shadow: 0 4px 12px rgba(225, 29, 72, 0.5);
+}
+
+/* ==========================================================================
+   Popup Card Styles
+   ========================================================================== */
+.leaflet-popup-content-wrapper {
+    padding: 0;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.leaflet-popup-content {
+    margin: 0 !important;
+    line-height: 1.4;
+    width: 280px !important;
+}
+
+.photo-popup-card {
+    display: flex;
+    flex-direction: column;
+    background: #ffffff;
+}
+
+.photo-popup-image-container {
+    position: relative;
+    width: 100%;
+    height: 175px;
+    background: #1e293b;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.photo-popup-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.photo-popup-image-container:hover img {
+    transform: scale(1.05);
+}
+
+.photo-popup-zoom-hint {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    background: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(4px);
+    color: #ffffff;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 11px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.photo-popup-body {
+    padding: 12px 14px 14px 14px;
+}
+
+.photo-popup-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 4px;
+}
+
+.photo-popup-desc {
+    font-size: 13px;
+    color: #475569;
+    margin-bottom: 10px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.photo-popup-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    color: #94a3b8;
+    border-top: 1px solid #f1f5f9;
+    padding-top: 8px;
+}
+
+.photo-popup-coords {
+    background: #f1f5f9;
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: #475569;
+    font-family: monospace;
+}
+
+/* ==========================================================================
+   Full Screen Lightbox Modal
+   ========================================================================== */
+.lightbox-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.92);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+}
+
+.lightbox-modal.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.lightbox-content {
+    max-width: 90vw;
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.lightbox-image {
+    max-width: 90vw;
+    max-height: 75vh;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+}
+
+.lightbox-caption {
+    margin-top: 12px;
+    color: #f8fafc;
+    text-align: center;
+    max-width: 600px;
+}
+
+.lightbox-caption h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.lightbox-caption p {
+    font-size: 14px;
+    color: #cbd5e1;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.15);
+    border: none;
+    color: #ffffff;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    font-size: 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease;
+}
+
+.lightbox-close:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* ==========================================================================
+   Loading Spinner
+   ========================================================================== */
+.map-loading-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(15, 23, 42, 0.85);
+    z-index: 2000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+    gap: 12px;
+    transition: opacity 0.4s ease;
+}
+
+.map-loading-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.spinner {
+    width: 42px;
+    height: 42px;
+    border: 3px solid rgba(255, 255, 255, 0.2);
+    border-top-color: #e11d48;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(1.2); }
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+    .map-header-bar {
+        top: 10px;
+        left: 10px;
+        right: 10px;
+    }
+    .map-badge {
+        padding: 6px 10px;
+        font-size: 11px;
+    }
+    .btn-icon {
+        padding: 6px 10px;
+        font-size: 11px;
+    }
+    .photo-popup-content {
+        width: 240px !important;
+    }
+}

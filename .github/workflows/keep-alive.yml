@@ -1,0 +1,38 @@
+name: Supabase Keep Alive
+
+on:
+  schedule:
+    # Εκτελείται κάθε 3 ημέρες στις 07:00 UTC (ώστε να ανανεώνει την περίοδο των 7 ημερών)
+    - cron: '0 7 */3 * *'
+  # Επιτρέπει χειροκίνητη εκτέλεση οποιαδήποτε στιγμή από την καρτέλα Actions
+  workflow_dispatch:
+
+jobs:
+  keep-alive:
+    name: Ping Supabase Database
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send API Request to Supabase
+        run: |
+          KEY="${{ secrets.SUPABASE_ANON_KEY }}"
+          if [ -z "$KEY" ]; then
+            # Προεπιλεγμένο anon key του project (ήδη δημόσιο στο web-widget)
+            KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVldWZsa3huZXRrcW9jeHllbGtyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODgzNDYzMjIsImV4cCI6MjEwMzkyMjMyMn0.lUOxKE45C8eUXY1SMNstZPxrzZD9uhTY-0TM4hsizdU"
+          fi
+
+          echo "Pinging Supabase REST API..."
+          HTTP_STATUS=$(curl -s -o response.json -w "%{http_code}" \
+            -H "apikey: $KEY" \
+            -H "Authorization: Bearer $KEY" \
+            "https://eeuflkxnetkqocxyelkr.supabase.co/rest/v1/photos?select=id&limit=1")
+
+          echo "HTTP Response Status: $HTTP_STATUS"
+          cat response.json
+          echo ""
+
+          if [ "$HTTP_STATUS" -ge 200 ] && [ "$HTTP_STATUS" -lt 300 ]; then
+            echo "✅ Supabase project successfully kept alive!"
+          else
+            echo "❌ Request failed with status $HTTP_STATUS"
+            exit 1
+          fi

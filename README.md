@@ -1,50 +1,57 @@
-# Οδηγίες Χρήσης & Φιλοξενίας: Web Map Widget
+# 🚵‍♂️ Hooligans Geo-Photos Project
 
-Το Web Map Widget είναι μια αυτόνομη, ελαφριά εφαρμογή χάρτη σε **HTML/CSS/JavaScript** με **Leaflet.js**. Δεν απαιτεί build tools (Webpack/Vite) και λειτουργεί παντού.
-
----
-
-## 🚀 Τοπική Δοκιμή (Local Preview)
-
-Μπορείτε να ανοίξετε άμεσα τον χάρτη στον υπολογιστή σας:
-
-1. Ανοίξτε το τερματικό στον φάκελο `web-widget/`.
-2. Εκτελέστε την εντολή:
-   ```bash
-   python -m http.server 8000
-   ```
-3. Ανοίξτε στον browser σας τη διεύθυνση: [http://localhost:8000/embed-example.html](http://localhost:8000/embed-example.html)
-
-> *Σημείωση: Ακόμα και αν δεν έχετε βάλει ακόμα τα κλειδιά Supabase στο `config.js`, ο χάρτης θα λειτουργήσει αμέσως σε **Demo Mode** με 4 ενδεικτικά σημεία στη Λέσβο!*
+Ένα πλήρες σύστημα καταγραφής σημείων/φωτογραφιών με GPS στίγμα από το κινητό και αυτόματης προβολής τους σε διαδραστικό χάρτη στην ιστοσελίδα σας.
 
 ---
 
-## 🌐 Πού και πώς να το ανεβάσετε (Hosting)
+## 📁 Δομή Έργου
 
-Έχετε τις εξής απλές επιλογές:
-
-### Επιλογή 1: Ανέβασμα στον υπάρχοντα web server / hosting σας (π.χ. cPanel / FTP)
-* Φτιάξτε έναν φάκελο `map/` στο `public_html/` της ιστοσελίδας σας.
-* Ανεβάστε τα αρχεία: `index.html`, `style.css`, `widget.js`, `config.js`.
-* Το widget θα είναι διαθέσιμο στο: `https://yoursite.com/map/`
-
-### Επιλογή 2: Δωρεάν Hosting (Vercel, Netlify, GitHub Pages, Cloudflare Pages)
-* Ανεβάστε τον φάκελο `web-widget/` δωρεάν σε **Cloudflare Pages** ή **Netlify** / **Vercel**.
-* Θα πάρετε ένα δωρεάν HTTPS link (π.χ. `https://hooligans-map.pages.dev`).
-
----
-
-## 📌 Πώς να το ενσωματώσετε στην ιστοσελίδα σας (Embed)
-
-Όπου θέλετε να εμφανίζεται ο χάρτης (π.χ. σε σελίδα WordPress, Elementor, Squarespace, Webflow κ.λπ.), προσθέστε ένα **Custom HTML block** με τον παρακάτω κώδικα:
-
-```html
-<iframe 
-    src="https://yoursite.com/map/index.html" 
-    width="100%" 
-    height="600px" 
-    style="border:none; border-radius:12px; box-shadow:0 8px 30px rgba(0,0,0,0.12);" 
-    allow="geolocation"
-    loading="lazy">
-</iframe>
 ```
+Hooligans/
+├── 🌐 web-widget/              # Διαδραστικός Χάρτης για την Ιστοσελίδα σας (Leaflet.js)
+│   ├── index.html              # Η κύρια σελίδα του widget
+│   ├── style.css               # Μοντέρνα styles, markers & lightbox
+│   ├── widget.js               # Λογική Leaflet, clustering & Supabase API
+│   ├── config.js               # Ρυθμίσεις Supabase URL / Anon Key
+│   ├── embed-example.html      # Παράδειγμα ενσωμάτωσης (iframe code)
+│   └── README.md               # Οδηγίες δοκιμής & φιλοξενίας
+│
+├── 📱 mobile-app/              # Εφαρμογή Κινητού (React Native / Expo)
+│   ├── src/
+│   │   ├── config/supabase.js  # Supabase client & persistent auth
+│   │   ├── services/           # Camera, GPS & Upload logic
+│   │   └── screens/            # Login, Capture & Pins Management
+│   ├── App.js                  # Root application & navigation
+│   ├── package.json
+│   └── README.md               # Οδηγίες εκτέλεσης στο κινητό (Expo Go)
+│
+├── ⚡ supabase/                 # Cloud Backend & Storage
+│   ├── schema.sql              # Database schema & RLS ασφάλεια
+│   └── README.md               # Βήμα-βήμα οδηγός ρύθμισης Supabase
+│
+└── 🤖 .github/workflows/        # Αυτοματισμοί (GitHub Actions)
+    └── keep-alive.yml          # Αυτόματο ping στη Supabase κάθε 3 ημέρες
+```
+
+---
+
+## 🚀 Γρήγορη Έναρξη σε 3 Βήματα
+
+### 1. Ρύθμιση Backend (Supabase)
+* Ακολουθήστε τον οδηγό στο [supabase/README.md](supabase/README.md).
+* Εκτελέστε το [schema.sql](supabase/schema.sql) στον SQL Editor.
+* Δημιουργήστε το storage bucket `photos` και αντιγράψτε το Project URL & Anon Key.
+
+### 2. Δοκιμή του Web Map Widget
+* Ανοίξτε το [web-widget/config.js](web-widget/config.js) και βάλτε τα κλειδιά σας.
+* Δοκιμάστε το άμεσα τοπικά εκτελώντας `python -m http.server 8000` στον φάκελο `web-widget` και ανοίγοντας το [http://localhost:8000/embed-example.html](http://localhost:8000/embed-example.html).
+* Ενσωματώστε το στο site σας με ένα απλό `<iframe>`!
+
+### 3. Εκτέλεση του Mobile App
+* Ανοίξτε το [mobile-app/src/config/supabase.js](mobile-app/src/config/supabase.js) και βάλτε τα κλειδιά σας.
+* Ακολουθήστε τον οδηγό στο [mobile-app/README.md](mobile-app/README.md) για να σκανάρετε το QR code με το **Expo Go** στο κινητό σας.
+
+---
+
+## ⏰ Supabase Auto Keep-Alive
+Το project περιλαμβάνει αυτοματισμό στο [.github/workflows/keep-alive.yml](.github/workflows/keep-alive.yml) που στέλνει περιοδικό αίτημα στη Supabase κάθε 3 ημέρες, αποτρέποντας την αυτόματη παύση (auto-pause) του δωρεάν πακέτου.

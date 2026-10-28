@@ -1,0 +1,20 @@
+# Dependencies
+node_modules/
+.expo/
+dist/
+web-build/
+npm-debug.*
+*.apk
+
+# Environment & Keys
+.env
+.env.local
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+
+# OS files
+.DS_Store
+Thumbs.db
